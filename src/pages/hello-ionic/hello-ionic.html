@@ -3,23 +3,25 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Hello Ionic</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-  <h3>Welcome to your first Ionic app!</h3>
+<form padding (submit)="addTask()" #f="ngForm">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>タスク</ion-label>
+      <ion-input type="text" [(ngModel)]="task" name="task" required
+                 minlength="3" maxlength="20"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button type="submit" ion-button block [disabled]="!f.form.valid">追加</button>
+</form>
 
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
-
+<ion-list>
+  <ion-item *ngFor="let t of tasks">{{t.name}}</ion-item>
+</ion-list>
 </ion-content>
